@@ -1,0 +1,24 @@
+<IfModule mod_rewrite.c>
+
+# mod_rewrite 简介和配置
+# Rewirte主要的功能就是实现URL的跳转和隐藏真实地址，基于Perl语言的正则表达式规范。
+# 平时帮助我们实现拟静态，拟目录，域名跳转，防止盗链等
+  Options -Multiviews
+
+# 将 RewriteEngine 模式打开
+  RewriteEngine On
+
+# 如果app程序存放于/camagru/public下
+  RewriteBase /camagru/public
+
+# 匹配条件，(如果是目录和文件就直接访问，不再匹配下面的RewriteRule)
+# %{REQUEST_FILENAME}  请求的文件名
+# !-d 不是目录或不存在
+# !-f 不是文件或不存在
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+
+# apache，iis 伪静态规则
+# [L] 这是最后一个匹配项，不再往下匹配
+  RewriteRule  ^(.+)$ index.php?url=$1 [QSA,L]
+</IfModule>
