@@ -132,7 +132,6 @@ class Users extends Controller // 繼承Controller類別
 
     //* 後加 Activate user
     public function activate() {
-
         // Check for GET
         if($_SERVER['REQUEST_METHOD'] == 'GET')
         {
@@ -201,7 +200,6 @@ class Users extends Controller // 繼承Controller類別
                     $this->createUserSession($loggedInUser);
                 } else {
                     $data['password_err'] = 'Password incorrect';
-
                     $this->view('users/login', $data);
                 }
             } else {
@@ -216,6 +214,65 @@ class Users extends Controller // 繼承Controller類別
                 'password' => '',
                 'email_err' => '',
                 'password_err' => '',
+            ];
+            // Load view 載入視圖
+            $this->view('users/login', $data);
+        }
+    }
+
+    // Change password
+    public function changePw($id) {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $data = [
+            'id' => $id,
+            'password' => trim($_POST['password']),
+            'confirm_password' => trim($_POST['confirm_password']),
+            'password_err' => '',
+            'confirm_password_err' => ''
+        ];
+        // Validate password
+        if(empty($data['password'])) 
+        {
+            $data['password_err'] = 'Pleae enter password';
+        } elseif(strlen($data['password']) < 6) {
+                $data['password_err'] = 'Password must be at least 6 characters';
+            }
+
+        // Validate confirm_password
+        if(empty($data['confirm_password'])) 
+        {
+            $data['confirm_password_err'] = 'Pleae confirm password';
+        } elseif($data['password'] != $data['confirm_password']) {
+                $data['confirm_password_err'] = 'Password do not match';
+            }
+
+        // Make sure no errors
+        if(empty($data['password_err']) && empty($data['confirm_password_err'])) {
+            // Validated
+            // Hash Password 密碼哈希加密
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+            //echo $data;
+            if($this->postModel->changePassword($data)) {
+            flash('change_success', 'Password changed');
+            redirect('users/login');
+            } else {
+            die('Somethis went wrong 出了些問題');
+            }
+        } else {
+            //Loas view with errors
+            $this->view('users/register', $data);
+        }
+        } else {
+            // Loas view with login /把login的view對應到這裡
+            $this->view('users/login', $data);
+        }
+        $data = [
+            'id' => $id,
+            'password' => '',
+            'confirm_password' => ''
             ];
             // Load view 載入視圖
             $this->view('users/login', $data);

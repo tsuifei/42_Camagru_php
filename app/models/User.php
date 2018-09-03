@@ -54,6 +54,20 @@
 
         }
 
+        // * 後加 change password by id
+        public function changePassword($data) {
+            $this->db->query('UPDATE posts SET password = :password WHERE id = :id');
+            // Bind values
+            $this->db->bind(':id', $data['id']);
+            $this->db->bind(':password', $data['password']);
+        
+            // Execute
+            if($this->db->execute()){
+                return true;
+            } else {               
+                return false;
+            }
+        }
         // Login User
         public function login($email, $password) 
         {
