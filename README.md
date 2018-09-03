@@ -24,7 +24,7 @@ de son mot de passe en cas d’oubli.
 
 ### Partie galerie [en cours]
 - être publique, donc accessible sans authentification. 
--afficher l’intégralité des images prises par les membres du site, triées par date de création. 
+- afficher l’intégralité des images prises par les membres du site, triées par date de création. 
 - pouvoir permettre à l’utilisateur de les commenter et de les liker si celui-ci est authentifié.
 - Lorsque une image reçoit un nouveau commentaire, l’auteur de cette image doit en être informé par mail. Cette préférence est activée par défaut, mais peut être désactivée dans les préférences de l’utilisateur.
 - La liste des images doit être paginée, avec au moins 5 éléments par page.
