@@ -8,10 +8,10 @@ Un utilisateur de site peut sélectionner une image dans une liste d’images su
 Les pages utilise HTML, CSS et JavaScript, Aucun Framework, Micro-Framework ou librairie.
 
 ###  Partie commune [fini]
-Serveur web : Apache,
-Communiquer avec Base de Données : PDO
-Requêtable en SQL
-Structurer en MVC
+- Serveur web : Apache
+- Communiquer avec Base de Données : PDO
+- Requêtable : SQL
+- Structurer : MVC
 
 ### Partie utilisateur [fini]
 - permettre à un utilisateur de s’inscrire, en demandant au minimum une adresse email, un nom d’utilisateur et un mot de passe un tant soit peu
