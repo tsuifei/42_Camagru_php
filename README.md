@@ -1,5 +1,5 @@
 # camagru
-### Premier Web Projet Camagru en php de l'Ecole 42 [-encore]
+### Premier Web Projet Camagru en php de l'Ecole 42
 
 Camagru est un application web permettant de réaliser des montages basiques à l’aide de webcam et d’images prédéfinies.
 
